@@ -45,3 +45,6 @@ Sample projects for various language in programing
 > scrapy crawl school
 > head ./school.csv
 ```
+## 3.Python
+- 3.1 查看被删的微信好友  
+[wechat-deleted-friends](https://github.com/BowenSun90/code-in-action/tree/master/python-in-action/wechat-deleted-friends)
