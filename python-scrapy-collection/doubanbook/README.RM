@@ -1,0 +1,12 @@
+#doubanbook
+---
+##介绍
+
+doubanbook是一个爬虫，它实现的功能是爬取豆瓣读书9分榜单
+
+这是一个scrapy实例，用来熟悉掌握scrapy的功能和用法。
+
+##1.0功能
+爬取豆瓣读书9分榜单
+
+来源：http://www.jianshu.com/users/30f737ee0051
