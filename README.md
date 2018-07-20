@@ -24,3 +24,24 @@ Sample projects for various language in programing
 > scrapy crawl dbbook
 > head ./douban.csv
 ```
+- 2.4 城市编码  
+[citycode](https://github.com/BowenSun90/code-in-action/tree/master/python-scrapy-collection/citycode)  
+```
+> cd citycode
+> scrapy crawl city
+> head ./city.csv
+```
+- 2.5 甲级医院信息
+[hospital](https://github.com/BowenSun90/code-in-action/tree/master/python-scrapy-collection/hospitalcrawler)  
+```
+> cd hospitalcrawler
+> scrapy crawl hospital
+> head ./hospital.csv
+```
+- 2.6 学校信息
+[school](https://github.com/BowenSun90/code-in-action/tree/master/python-scrapy-collection/schoolcrawler)  
+```
+> cd schoolcrawler
+> scrapy crawl school
+> head ./school.csv
+```
