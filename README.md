@@ -48,3 +48,7 @@ Sample projects for various language in programing
 ## 3.Python
 - 3.1 查看被删的微信好友  
 [wechat-deleted-friends](https://github.com/BowenSun90/code-in-action/tree/master/python-in-action/wechat-deleted-friends)
+
+## 4.Storm
+- 4.1 Wordcount-example
+[Wordcount](https://github.com/BowenSun90/code-in-action/tree/master/storm-in-action/Wordcount)   
