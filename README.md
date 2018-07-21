@@ -50,5 +50,7 @@ Sample projects for various language in programing
 [wechat-deleted-friends](https://github.com/BowenSun90/code-in-action/tree/master/python-in-action/wechat-deleted-friends)
 
 ## 4.Storm
-- 4.1 Wordcount-example
+- 4.1 Wordcount   
 [Wordcount](https://github.com/BowenSun90/code-in-action/tree/master/storm-in-action/Wordcount)   
+- 4.2 Log Analysis   
+[calllog-analysis](https://github.com/BowenSun90/code-in-action/tree/master/storm-in-action/calllog-analysis)   
