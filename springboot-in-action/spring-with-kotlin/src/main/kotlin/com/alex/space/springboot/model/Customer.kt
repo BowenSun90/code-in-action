@@ -1,4 +1,4 @@
-package com.alex.springboot.model
+package com.alex.space.springboot.model
 
 import javax.persistence.Entity
 import javax.persistence.GeneratedValue

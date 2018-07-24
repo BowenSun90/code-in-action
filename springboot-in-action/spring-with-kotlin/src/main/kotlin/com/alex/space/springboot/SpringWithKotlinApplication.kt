@@ -1,7 +1,7 @@
-package com.alex.springboot
+package com.alex.space.springboot
 
-import com.alex.springboot.dao.CustomerRepository
-import com.alex.springboot.model.Customer
+import com.alex.space.springboot.dao.CustomerRepository
+import com.alex.space.springboot.model.Customer
 import org.springframework.boot.CommandLineRunner
 import org.springframework.boot.SpringApplication
 import org.springframework.boot.autoconfigure.SpringBootApplication

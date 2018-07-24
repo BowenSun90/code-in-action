@@ -1,4 +1,4 @@
-package com.alex.springboot
+package com.alex.space.springboot
 
 import org.junit.Test
 import org.junit.runner.RunWith

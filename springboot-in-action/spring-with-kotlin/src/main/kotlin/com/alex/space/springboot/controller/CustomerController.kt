@@ -1,6 +1,6 @@
-package com.alex.springboot.controller
+package com.alex.space.springboot.controller
 
-import com.alex.springboot.dao.CustomerRepository
+import com.alex.space.springboot.dao.CustomerRepository
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.web.bind.annotation.*
 

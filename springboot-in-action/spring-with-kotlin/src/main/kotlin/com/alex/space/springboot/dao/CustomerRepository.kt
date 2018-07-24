@@ -1,6 +1,6 @@
-package com.alex.springboot.dao
+package com.alex.space.springboot.dao
 
-import com.alex.springboot.model.Customer
+import com.alex.space.springboot.model.Customer
 import org.springframework.data.repository.CrudRepository
 
 /**
