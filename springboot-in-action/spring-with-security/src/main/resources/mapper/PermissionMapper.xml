@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.alex.space.springboot.dao.PermissionMapper">
+    <select id="findAll" resultType="com.alex.space.springboot.dto.Permission">
+        SELECT *
+        FROM Sys_permission;
+    </select>
+    <select id="findByAdminUserId" parameterType="int" resultType="com.alex.space.springboot.dto.Permission">
+        SELECT p.*
+        FROM Sys_User u
+            LEFT JOIN sys_role_user sru ON u.id = sru.Sys_User_id
+            LEFT JOIN Sys_Role r ON sru.Sys_Role_id = r.id
+            LEFT JOIN Sys_permission_role spr ON spr.sys_role_id = r.id
+            LEFT JOIN Sys_permission p ON p.id = spr.sys_permission_id
+        WHERE u.id = #{userId}
+    </select>
+</mapper>

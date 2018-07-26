@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.alex.space.springboot.dao.UserMapper">
+    <resultMap id="userMap" type="com.alex.space.springboot.dto.SysUser">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="username" property="username" jdbcType="VARCHAR"/>
+        <result column="password" property="password" jdbcType="VARCHAR"/>
+        <collection property="roles" ofType="com.alex.space.springboot.dto.SysRole">
+            <result column="name" property="name"/>
+        </collection>
+    </resultMap>
+    <select id="findByUserName" parameterType="String" resultMap="userMap">
+        SELECT
+            u.*,
+            r.name
+        FROM Sys_User u
+            LEFT JOIN sys_role_user sru ON u.id = sru.Sys_User_id
+            LEFT JOIN Sys_Role r ON sru.Sys_Role_id = r.id
+        WHERE username = #{username}
+    </select>
+</mapper>

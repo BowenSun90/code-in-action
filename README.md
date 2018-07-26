@@ -10,7 +10,12 @@ https://swagger.io/
 
 - 1.2 Springboot with Kotlin    
 [spring-with-Kotlin](https://github.com/BowenSun90/code-in-action/tree/master/springboot-in-action/spring-with-kotlin)   
-Kotlin和Java混合编程   
+Kotlin和Java混合编程  
+
+- 1.3 Springboot with security   
+[spring-with-security](https://github.com/BowenSun90/code-in-action/tree/master/springboot-in-action/spring-with-security)    
+Springboot权限控制   
+
 
 ## 2.Python爬虫
 - 2.1 Python scrapy sample program   
