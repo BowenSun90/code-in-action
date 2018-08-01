@@ -16,6 +16,9 @@ Kotlin和Java混合编程
 [spring-with-security](https://github.com/BowenSun90/code-in-action/tree/master/springboot-in-action/spring-with-security)    
 Springboot权限控制   
 
+- 1.4 Springboot support Spring batch  
+[spring-batch](https://github.com/BowenSun90/code-in-action/tree/master/springboot-in-action/spring-batch)   
+
 
 ## 2.Python爬虫
 - 2.1 Python scrapy sample program   
