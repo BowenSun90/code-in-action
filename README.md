@@ -72,3 +72,7 @@ Springboot权限控制
 
 - 4.2 Log Analysis   
 [calllog-analysis](https://github.com/BowenSun90/code-in-action/tree/master/storm-in-action/calllog-analysis)   
+
+## 5.Flink
+- 5.1 Streaming-Wordcount WithSocket    
+[Streaming-wordcount](https://github.com/BowenSun90/code-in-action/tree/master/flink-in-action/streaming-wordcount)   
