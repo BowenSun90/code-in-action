@@ -44,7 +44,6 @@ object SocketWindowWordCount {
       .timeWindow(Time.seconds(5), Time.seconds(1))
       .sum("count")
 
-
     // print the results with a single thread, rather than in parallel
     windowCounts.print().setParallelism(1)
 
