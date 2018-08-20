@@ -31,7 +31,9 @@ object SocketWindowWordCount {
     }
 
     // get the execution environment
-    val env: StreamExecutionEnvironment = StreamExecutionEnvironment.getExecutionEnvironment
+    val env: StreamExecutionEnvironment = StreamExecutionEnvironment
+//      .createLocalEnvironment()
+      .getExecutionEnvironment
 
     // get input data by connecting to the socket
     val text = env.socketTextStream(hostname, port, '\n')
