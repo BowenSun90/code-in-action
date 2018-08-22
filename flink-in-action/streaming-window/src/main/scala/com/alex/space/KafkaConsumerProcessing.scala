@@ -39,6 +39,7 @@ object KafkaConsumerProcessing {
 
     val input_topic = "test"
 
+    // kafka输入： 空格分隔的随机长度字符串 例：xxxx XXXX XXX
     val stream = env.addSource(
       new FlinkKafkaConsumer09[String](input_topic, new SimpleStringSchema(), kafkaProps)
     )
@@ -71,10 +72,10 @@ object KafkaConsumerProcessing {
 
         sliding.print()
       case "3" =>
-        // Session windows
+      // Session windows
 
       case "4" =>
-        // Global windows
+      // Global windows
 
       case _ =>
         println("exit")

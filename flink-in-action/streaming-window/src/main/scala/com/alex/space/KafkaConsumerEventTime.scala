@@ -2,11 +2,17 @@ package com.alex.space
 
 import java.util.Properties
 
+import org.apache.flink.streaming.api.TimeCharacteristic
+import org.apache.flink.streaming.api.functions.AssignerWithPeriodicWatermarks
+import org.apache.flink.streaming.api.scala.function.RichWindowFunction
 import org.apache.flink.streaming.api.scala.{StreamExecutionEnvironment, _}
+import org.apache.flink.streaming.api.watermark.Watermark
+import org.apache.flink.streaming.api.windowing.assigners.EventTimeSessionWindows
 import org.apache.flink.streaming.api.windowing.time.Time
-import org.apache.flink.streaming.api.{CheckpointingMode, TimeCharacteristic}
+import org.apache.flink.streaming.api.windowing.windows.TimeWindow
 import org.apache.flink.streaming.connectors.kafka.FlinkKafkaConsumer09
 import org.apache.flink.streaming.util.serialization.SimpleStringSchema
+import org.apache.flink.util.Collector
 
 /**
   *
@@ -25,39 +31,72 @@ object KafkaConsumerEventTime {
     env.setStreamTimeCharacteristic(TimeCharacteristic.EventTime)
 
     // set checkpoint
-    env.enableCheckpointing(1000)
-    env.getCheckpointConfig.setCheckpointingMode(CheckpointingMode.EXACTLY_ONCE)
+    //    env.enableCheckpointing(2000)
+    //    env.getCheckpointConfig.setCheckpointingMode(CheckpointingMode.EXACTLY_ONCE)
 
     // set kafka consumer
     val kafkaProps = new Properties()
     kafkaProps.setProperty("zookeeper.connect", zookeeper_host)
     kafkaProps.setProperty("bootstrap.servers", kafka_broker)
 
+    // set parallelism
+    env.setParallelism(2)
+
     val input_topic = "test"
 
+    // kafka输入： timestamp \t user \t message
     val stream = env.addSource(
       new FlinkKafkaConsumer09[String](input_topic, new SimpleStringSchema(), kafkaProps)
     )
-      .flatMap(_.split(" "))
-      .map((_, 1))
+      .map(x => {
+        val param = x.split("\t")
+        Event(param(0).toLong, param(1), param(2))
+      })
 
-    // Time windows
-    val tumbling = stream
-      .keyBy(0)
-      .timeWindow(Time.seconds(10))
-      .sum(1)
+    val session = stream
+      .assignTimestampsAndWatermarks(new TimestampAndWatermarkAssigner)
+      .keyBy(_.user)
+      .window(EventTimeSessionWindows.withGap(Time.seconds(5)))
+      .apply(new SessionWindowAnalyzer)
 
-    tumbling.print()
-
-//    val sliding = stream
-//      .keyBy(0)
-//      .timeWindow(Time.seconds(10), Time.seconds(5))
-//      .sum(1)
-//
-//    sliding.print()
-
+    session.print()
 
     env.execute()
 
   }
+
+  case class Event(timestamp: Long, user: String, msg: String)
+
+  class TimestampAndWatermarkAssigner extends AssignerWithPeriodicWatermarks[Event] {
+    var currentMaxTimestamp = 0L
+
+    val maxOutOfOrder = 10000L
+
+    override def getCurrentWatermark: Watermark = new Watermark(currentMaxTimestamp - maxOutOfOrder)
+
+    override def extractTimestamp(t: Event, l: Long): Long = {
+      currentMaxTimestamp = t.timestamp max currentMaxTimestamp
+      t.timestamp
+    }
+  }
+
+
+  case class AnalyzeResult(user: String, windowStart: Long, windowEnd: Long, windowSize: Int, totalSize: Int, detail: String)
+
+  class SessionWindowAnalyzer extends RichWindowFunction[Event, AnalyzeResult, String, TimeWindow] {
+    var size = 0
+
+    override def apply(key: String, window: TimeWindow, input: Iterable[Event], out: Collector[AnalyzeResult]): Unit = {
+      val list = input.toList.sortBy(_.timestamp).map(_.msg).mkString("\t")
+
+      val window_start = window.getStart
+      val window_end = window.getEnd
+      val window_size = input.size
+
+      size = size + window_size
+
+      out.collect(AnalyzeResult(key, window_start, window_end, window_size, size, list))
+    }
+  }
+
 }
