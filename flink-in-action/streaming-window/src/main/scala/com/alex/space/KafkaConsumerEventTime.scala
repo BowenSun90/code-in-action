@@ -2,17 +2,13 @@ package com.alex.space
 
 import java.util.Properties
 
-import org.apache.flink.streaming.api.TimeCharacteristic
-import org.apache.flink.streaming.api.functions.AssignerWithPeriodicWatermarks
-import org.apache.flink.streaming.api.scala.function.RichWindowFunction
+import com.alex.space.eventtime.{SessionWindowAnalyzer, TimestampAndWatermarkAssigner}
 import org.apache.flink.streaming.api.scala.{StreamExecutionEnvironment, _}
-import org.apache.flink.streaming.api.watermark.Watermark
 import org.apache.flink.streaming.api.windowing.assigners.EventTimeSessionWindows
 import org.apache.flink.streaming.api.windowing.time.Time
-import org.apache.flink.streaming.api.windowing.windows.TimeWindow
+import org.apache.flink.streaming.api.{CheckpointingMode, TimeCharacteristic}
 import org.apache.flink.streaming.connectors.kafka.FlinkKafkaConsumer09
 import org.apache.flink.streaming.util.serialization.SimpleStringSchema
-import org.apache.flink.util.Collector
 
 /**
   *
@@ -31,8 +27,8 @@ object KafkaConsumerEventTime {
     env.setStreamTimeCharacteristic(TimeCharacteristic.EventTime)
 
     // set checkpoint
-    //    env.enableCheckpointing(2000)
-    //    env.getCheckpointConfig.setCheckpointingMode(CheckpointingMode.EXACTLY_ONCE)
+    env.enableCheckpointing(1000)
+    env.getCheckpointConfig.setCheckpointingMode(CheckpointingMode.EXACTLY_ONCE)
 
     // set kafka consumer
     val kafkaProps = new Properties()
@@ -67,36 +63,7 @@ object KafkaConsumerEventTime {
 
   case class Event(timestamp: Long, user: String, msg: String)
 
-  class TimestampAndWatermarkAssigner extends AssignerWithPeriodicWatermarks[Event] {
-    var currentMaxTimestamp = 0L
-
-    val maxOutOfOrder = 10000L
-
-    override def getCurrentWatermark: Watermark = new Watermark(currentMaxTimestamp - maxOutOfOrder)
-
-    override def extractTimestamp(t: Event, l: Long): Long = {
-      currentMaxTimestamp = t.timestamp max currentMaxTimestamp
-      t.timestamp
-    }
-  }
-
-
   case class AnalyzeResult(user: String, windowStart: Long, windowEnd: Long, windowSize: Int, totalSize: Int, detail: String)
 
-  class SessionWindowAnalyzer extends RichWindowFunction[Event, AnalyzeResult, String, TimeWindow] {
-    var size = 0
-
-    override def apply(key: String, window: TimeWindow, input: Iterable[Event], out: Collector[AnalyzeResult]): Unit = {
-      val list = input.toList.sortBy(_.timestamp).map(_.msg).mkString("\t")
-
-      val window_start = window.getStart
-      val window_end = window.getEnd
-      val window_size = input.size
-
-      size = size + window_size
-
-      out.collect(AnalyzeResult(key, window_start, window_end, window_size, size, list))
-    }
-  }
 
 }
