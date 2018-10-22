@@ -10,7 +10,8 @@
 
     <properties>
         <projectName>call-log-analysis</projectName>
-        <storm.version>1.0.6</storm.version>
+<!--         <storm.version>1.0.6</storm.version> -->
+        <storm.version>1.2.2</storm.version>
         <kafka.version>0.8.2.1</kafka.version>
     </properties>
 
