@@ -159,8 +159,10 @@ Guava memory cache
 [Streaming-window](https://github.com/BowenSun90/code-in-action/tree/master/flink-in-action/streaming-window)   
 
 ## 6.HBase
-- 6.1 HBase Bulk load via Spark
+- 6.1 HBase Bulk load via Spark    
 [CreateAndBulkloadHFile.scala](https://github.com/BowenSun90/code-in-action/blob/master/hbase-in-action/src/main/scala/com/alex/space/hbase/spark/CreateAndBulkloadHFile.scala)
 
+- 6.2 HBase Bulk load via Flink    
+// todo
 
 
