@@ -1,5 +1,6 @@
 package com.alex.space.java.interview.string;
 
+import com.alex.space.java.interview.util.Generator;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -20,49 +21,60 @@ public class Solution {
   public static void main(String[] args) {
     Solution solution = new Solution();
 
-//    log.info("{}", solution.lengthOfLongestSubstring("abcadcae"));
-//    log.info("{}", solution.lengthOfLongestSubstring1("abcadcae"));
-//    log.info("{}", solution.lengthOfLongestSubstring2("abcadcae"));
-//
-//    log.info("{}", solution.multiply("123", "456"));
-//    log.info("{}", solution.multiply1("123", "456"));
-//
-//    log.info("{}", solution.reverseWords("hello   world !"));
-//    log.info("{}", solution.reverseWords1("hello   world !"));
-//
-//    log.info("{}", solution.twoSum(new int[]{1, 2, 3}, 4));
-//
-//    log.info("{}", solution.threeSum(new int[]{1, 2, 3, -3, -2, -5}));
-//    log.info("{}", solution.threeSum(new int[]{-1, -1, -1, 1}));
-//    log.info("{}", solution.threeSum(new int[]{-1, 0, 1, 2, -1, -4}));
-//
-//    int[][] grid = Generator.randomGrid(10, 12);
-//    log.info("{}", solution.maxAreaOfIsland(grid));
+    log.info("{}", solution.lengthOfLongestSubstring("abcadcae"));
+    log.info("{}", solution.lengthOfLongestSubstring1("abcadcae"));
+    log.info("{}", solution.lengthOfLongestSubstring2("abcadcae"));
 
-//    log.info("{}", solution.search(new int[]{4, 5, 6, 7, 8, 0, 1, 2}, 2));
-//    log.info("{}", solution.search(new int[]{1}, 1));
-//    log.info("{}", solution.search(new int[]{1, 3}, 2));
+    log.info("{}", solution.multiply("123", "456"));
+    log.info("{}", solution.multiply1("123", "456"));
 
-//    log.info("{}", solution.search1(new int[]{}, 1));
-//    log.info("{}", solution.search1(new int[]{1}, 1));
-//    log.info("{}", solution.search1(new int[]{1, 3}, 2));
-//    log.info("{}", solution.search1(new int[]{4, 5, 6, 7, 0, 1, 2}, 0));
+    log.info("{}", solution.reverseWords("hello   world !"));
+    log.info("{}", solution.reverseWords1("hello   world !"));
 
-//    log.info("{}", solution.findMaxConsecutiveOnes(new int[]{1, 0, 1, 1, 0, 1}));
+    log.info("{}", solution.twoSum(new int[]{1, 2, 3}, 4));
 
-//    log.info("{}", solution.findKthLargest(new int[]{4, 1, 6, 3, 7, 5, 8, 9, 2}, 3));
-//    log.info("{}", solution.findKthLargest(new int[]{1}, 1));
-//    log.info("{}", solution.findKthLargest(new int[]{1, 2}, 2));
+    log.info("{}", solution.threeSum(new int[]{1, 2, 3, -3, -2, -5}));
+    log.info("{}", solution.threeSum(new int[]{-1, -1, -1, 1}));
+    log.info("{}", solution.threeSum(new int[]{-1, 0, 1, 2, -1, -4}));
 
-//    log.info("{}", solution.findKthLargest1(new int[]{4, 1, 6, 3, 7, 5, 8, 9, 2}, 4));
-//    log.info("{}", solution.findKthLargest1(new int[]{1}, 1));
-//    log.info("{}", solution.findKthLargest1(new int[]{1, 2}, 2));
+    int[][] grid = Generator.randomGrid(10, 12);
+    log.info("{}", solution.maxAreaOfIsland(grid));
+
+    log.info("{}", solution.search(new int[]{4, 5, 6, 7, 8, 0, 1, 2}, 2));
+    log.info("{}", solution.search(new int[]{1}, 1));
+    log.info("{}", solution.search(new int[]{1, 3}, 2));
+
+    log.info("{}", solution.search1(new int[]{}, 1));
+    log.info("{}", solution.search1(new int[]{1}, 1));
+    log.info("{}", solution.search1(new int[]{1, 3}, 2));
+    log.info("{}", solution.search1(new int[]{4, 5, 6, 7, 0, 1, 2}, 0));
+
+    log.info("{}", solution.findMaxConsecutiveOnes(new int[]{1, 0, 1, 1, 0, 1}));
+
+    log.info("{}", solution.findKthLargest(new int[]{4, 1, 6, 3, 7, 5, 8, 9, 2}, 3));
+    log.info("{}", solution.findKthLargest(new int[]{1}, 1));
+    log.info("{}", solution.findKthLargest(new int[]{1, 2}, 2));
+
+    log.info("{}", solution.findKthLargest1(new int[]{4, 1, 6, 3, 7, 5, 8, 9, 2}, 4));
+    log.info("{}", solution.findKthLargest1(new int[]{1}, 1));
+    log.info("{}", solution.findKthLargest1(new int[]{1, 2}, 2));
     log.info("{}", solution.findKthLargest1(new int[]{3, 3, 3, 3, 4, 3, 3, 3, 3}, 5));
 
-//    int[] nums = new int[]{4, 1, 6, 3, 7, 5, 8, 9, 2};
-//    solution.quickSort1(nums);
-//    log.info("{}", nums);
+    int[] nums = new int[]{4, 1, 6, 3, 7, 5, 8, 9, 2};
+    solution.quickSort1(nums);
+    log.info("{}", nums);
 
+    log.info("{}", solution
+        .longestConsecutive(new int[]{-3, 4, 9, 3, -6, -5, -5, -1, -1, 9, 7, -3, -4}));
+
+    log.info("{}", solution
+        .longestConsecutive1(new int[]{-3, 4, 9, 3, -6, -5, -5, -1, -1, 9, 7, -3, -4}));
+
+    grid = Generator.randomGrid(5);
+    log.info("{}", solution.findCircleNum(grid));
+
+    log.info("{}", solution.trap(new int[]{0, 1, 0, 2, 1, 0, 1, 3, 2, 1, 2, 1}));
+    
   }
 
   // 无重复最长子字符串
@@ -608,5 +620,177 @@ public class Solution {
     throw new NotImplementedException();
   }
 
+  // 最长连续序列
+
+  public int longestConsecutive(int[] nums) {
+    if (nums.length == 0) {
+      return 0;
+    }
+
+    HashMap<Integer, Integer> map = new HashMap<>();
+    Set<Integer> set = new HashSet<>();
+
+    int max = 1;
+    for (int i = 0; i < nums.length; i++) {
+      if (map.containsKey(nums[i]) || set.contains(nums[i])) {
+        continue;
+      }
+
+      boolean flag = false;
+      if (map.containsKey(nums[i] + 1)) {
+        map.put(nums[i], map.get(nums[i] + 1) + 1);
+        map.remove(nums[i] + 1);
+        set.add(nums[i] + 1);
+        flag = true;
+        max = Math.max(max, map.get(nums[i]));
+      }
+
+      for (Integer k : map.keySet()) {
+        if (map.get(k) + k == nums[i]) {
+          if (flag) {
+            map.put(k, map.get(k) + map.get(nums[i]));
+            map.remove(nums[i]);
+            max = Math.max(max, map.get(k));
+          } else {
+            map.put(k, map.get(k) + 1);
+            max = Math.max(max, map.get(k));
+          }
+          set.add(nums[i]);
+          flag = true;
+          break;
+        }
+      }
+
+      if (!flag) {
+        map.put(nums[i], 1);
+      }
+    }
+
+    return max;
+  }
+
+  public int longestConsecutive1(int[] nums) {
+    int max = 0;
+    Set<Integer> set = new HashSet<>();
+    for (int num : nums) {
+      set.add(num);
+    }
+
+    for (int num : nums) {
+      if (set.remove(num)) {
+        int pre = num - 1, next = num + 1;
+        while (set.remove(pre)) {
+          --pre;
+        }
+        while (set.remove(next)) {
+          ++next;
+        }
+        max = Math.max(max, next - pre - 1);
+      }
+    }
+    return max;
+  }
+
+  // 朋友圈
+
+  public int findCircleNum(int[][] m) {
+    int cnt = 0;
+    int[] visited = new int[m.length];
+    for (int i = 0; i < m.length; i++) {
+      if (visited[i] == 0) {
+        // 没有访问过，并把可以包含在朋友圈的所有的有关系的好友标记出来
+        cnt++;
+        deepSearch(m, visited, i);
+      }
+    }
+    return cnt;
+  }
+
+  private void deepSearch(int[][] m, int[] visited, int i) {
+    visited[i] = 1;
+    for (int j = 0; j < m.length; j++) {
+      if (m[i][j] == 1 && visited[j] == 0) {
+        deepSearch(m, visited, j);
+      }
+
+    }
+  }
+
+  public int findCircleNum1(int[][] m) {
+    if (m.length == 0) {
+      return 0;
+    }
+    int pre[] = new int[m.length];
+    for (int i = 0; i < m.length; i++) {
+      // 先各自为组，组名也为自己的序号
+      pre[i] = i;
+    }
+    // 一开始有多少人就有多少个朋友圈，当每出现一对朋友时就减1，最后就是总的朋友圈数量了。
+    int group = m.length;
+    for (int i = 0; i < m.length; i++) {
+      for (int j = 0; j < m.length; j++) {
+        if (i != j && m[i][j] == 1) {
+          //x1为i所属的组,x2为j所属的组
+          int x1 = find(i, pre);
+          int x2 = find(j, pre);
+          if (x1 != x2) {
+            //如果不属于同个朋友圈的话就把i归为j的组
+            pre[x1] = x2;
+            group--;
+          }
+        }
+      }
+    }
+    return group;
+  }
+
+  private int find(int x, int[] pre) {
+    // 找到x属于哪一个组,如果不是自成一组，在往下找pre[x]属于哪个组
+    return pre[x] == x ? x : find(pre[x], pre);
+  }
+
+  // 接雨水
+
+  public int trap(int[] height) {
+    int res = 0;
+    if (height.length == 0 || height.length == 1) {
+      return res;
+    }
+
+    int l = 0, r = height.length - 1;
+    while (l < height.length - 1 && height[l] < height[l + 1]) {
+      l++;
+    }
+    while (r > 0 && height[r] < height[r - 1]) {
+      r--;
+    }
+
+    while (l < r) {
+      int lh = height[l];
+      int rh = height[r];
+      if (lh <= rh) {
+        while (l < r) {
+          l++;
+          if (height[l] < lh) {
+            res += lh - height[l];
+          } else {
+            break;
+          }
+        }
+      } else {
+        while (l < r) {
+          r--;
+          if (height[r] < rh) {
+            res += rh - height[r];
+          } else {
+            break;
+          }
+        }
+
+      }
+    }
+
+    return res;
+  }
 
 }
