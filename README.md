@@ -158,6 +158,7 @@ Guava memory cache
 - 5.3 Streaming-Window operation      
 [Streaming-window](https://github.com/BowenSun90/code-in-action/tree/master/flink-in-action/streaming-window)   
 
+
 ## 6.HBase
 - 6.1 HBase Bulk load via Spark    
 [CreateAndBulkloadHFile.scala](https://github.com/BowenSun90/code-in-action/blob/master/hbase-in-action/src/main/scala/com/alex/space/hbase/spark/CreateAndBulkloadHFile.scala)
@@ -166,3 +167,6 @@ Guava memory cache
 // todo
 
 
+## 7.Quartz
+- 7.1 Quartz demo     
+[quartz-in-action](https://github.com/BowenSun90/code-in-action/blob/master/quartz-in-action)
