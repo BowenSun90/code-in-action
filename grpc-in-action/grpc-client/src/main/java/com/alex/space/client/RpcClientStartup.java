@@ -7,7 +7,8 @@ import com.alex.space.proto.GreeterGrpc;
 import com.alex.space.proto.HelloReply;
 import com.alex.space.proto.HelloRequest;
 import com.alex.space.proto.Metric;
-import com.alex.space.proto.MetricsGrpc;
+import com.alex.space.proto.MetricsClientSideGrpc;
+import com.alex.space.proto.MetricsTwoWayGrpc;
 import io.grpc.Channel;
 import io.grpc.stub.StreamObserver;
 import lombok.extern.slf4j.Slf4j;
@@ -34,24 +35,26 @@ public class RpcClientStartup {
 
       log.info("Rpc client started.");
 
-      Thread mainThread = Thread.currentThread();
-
       // Make a call
-//      calc();
 //      greet();
+//      clientSideStream();
+//      twoWayStream();
 
       Thread t = new Thread(() -> {
+        twoWayStreamKeepAlive();
+
         try {
-          calc();
-          mainThread.join();
-        } catch (InterruptedException e) {
+          Thread.sleep(5000);
+        } catch (Exception e) {
           e.printStackTrace();
         }
       });
       t.start();
+      t.join();
 
+      log.info("Wait...");
       Thread.sleep(10000);
-      log.info("....");
+      log.info("Finish...");
 
     } catch (Exception e) {
       e.printStackTrace();
@@ -69,14 +72,43 @@ public class RpcClientStartup {
     log.info("Response: {}", reply);
   }
 
-  private static void calc() throws InterruptedException {
+  private static void clientSideStream() {
     Channel channel = GrpcClient.connect("RpcServer-1").getChannel();
-    MetricsGrpc.MetricsStub stub = MetricsGrpc.newStub(channel);
+    MetricsClientSideGrpc.MetricsClientSideStub stub = MetricsClientSideGrpc.newStub(channel);
 
     StreamObserver<Metric> collect = stub.collect(new StreamObserver<Average>() {
       @Override
       public void onNext(Average value) {
-        log.info("Average: " + value.getVal());
+        log.info("Average(client side stream): " + value.getVal());
+      }
+
+      @Override
+      public void onError(Throwable t) {
+      }
+
+      @Override
+      public void onCompleted() {
+      }
+    });
+
+    collect.onNext(Metric.newBuilder().setMetric(1).build());
+    collect.onNext(Metric.newBuilder().setMetric(2).build());
+    collect.onNext(Metric.newBuilder().setMetric(3).build());
+    collect.onNext(Metric.newBuilder().setMetric(4).build());
+    collect.onNext(Metric.newBuilder().setMetric(5).build());
+    collect.onNext(Metric.newBuilder().setMetric(6).build());
+    collect.onNext(Metric.newBuilder().setMetric(7).build());
+    collect.onCompleted();
+  }
+
+  private static void twoWayStream() {
+    Channel channel = GrpcClient.connect("RpcServer-1").getChannel();
+    MetricsTwoWayGrpc.MetricsTwoWayStub stub = MetricsTwoWayGrpc.newStub(channel);
+
+    StreamObserver<Metric> collect = stub.collect(new StreamObserver<Average>() {
+      @Override
+      public void onNext(Average value) {
+        log.info("Average(two way stream): " + value.getVal());
       }
 
       @Override
@@ -96,7 +128,36 @@ public class RpcClientStartup {
     collect.onNext(Metric.newBuilder().setMetric(6).build());
     collect.onNext(Metric.newBuilder().setMetric(7).build());
 
-    Thread.sleep(5000);
     collect.onCompleted();
+  }
+
+  private static void twoWayStreamKeepAlive() {
+    Channel channel = GrpcClient.connect("RpcServer-1").getChannel();
+    MetricsTwoWayGrpc.MetricsTwoWayStub stub = MetricsTwoWayGrpc.newStub(channel);
+
+    StreamObserver<Metric> collect = stub.collect(new StreamObserver<Average>() {
+      @Override
+      public void onNext(Average value) {
+        log.info("Average(two way stream): " + value.getVal());
+      }
+
+      @Override
+      public void onError(Throwable t) {
+      }
+
+      @Override
+      public void onCompleted() {
+      }
+    });
+
+    for (int i = 0; i < 1000; i++) {
+      collect.onNext(Metric.newBuilder().setMetric(i).build());
+
+      try {
+        Thread.sleep(5000);
+      } catch (Exception e) {
+        e.printStackTrace();
+      }
+    }
   }
 }

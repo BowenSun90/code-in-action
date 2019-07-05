@@ -2,7 +2,7 @@ package com.alex.space.server.rpc;
 
 import com.alex.space.proto.Average;
 import com.alex.space.proto.Metric;
-import com.alex.space.proto.MetricsGrpc;
+import com.alex.space.proto.MetricsClientSideGrpc;
 import io.grpc.stub.StreamObserver;
 import lombok.extern.slf4j.Slf4j;
 
@@ -10,7 +10,7 @@ import lombok.extern.slf4j.Slf4j;
  * @author Alex Created by Alex on 2019/7/5.
  */
 @Slf4j
-public class MetricsRpcService extends MetricsGrpc.MetricsImplBase {
+public class MetricsClientSideRpcService extends MetricsClientSideGrpc.MetricsClientSideImplBase {
 
   @Override
   public StreamObserver<Metric> collect(final StreamObserver<Average> responseObserver) {
@@ -34,7 +34,7 @@ public class MetricsRpcService extends MetricsGrpc.MetricsImplBase {
       @Override
       public void onCompleted() {
         Average average = Average.newBuilder()
-            .setVal(sum / count)
+            .setVal(sum * 1.0/ count )
             .build();
         responseObserver.onNext(average);
       }

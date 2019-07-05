@@ -6,8 +6,12 @@ option java_multiple_files = true;
 
 import "google/protobuf/timestamp.proto";
 
-service Metrics {
+service MetricsClientSide {
   rpc collect (stream Metric) returns (Average);
+}
+
+service MetricsTwoWay {
+  rpc collect (stream Metric) returns (stream Average);
 }
 
 message Metric {
@@ -18,3 +22,4 @@ message Metric {
 message Average {
   double val = 1;
 }
+
