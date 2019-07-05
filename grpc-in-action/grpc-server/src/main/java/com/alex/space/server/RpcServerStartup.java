@@ -3,6 +3,7 @@ package com.alex.space.server;
 import com.alex.space.common.GrpcProperties;
 import com.alex.space.common.GrpcServer;
 import com.alex.space.server.rpc.GreeterRpcService;
+import com.alex.space.server.rpc.MetricsRpcService;
 import lombok.extern.slf4j.Slf4j;
 
 /**
@@ -21,7 +22,9 @@ public class RpcServerStartup {
           .port(9001)
           .build();
 
-      GrpcServer server = new GrpcServer(properties, new GreeterRpcService());
+      GrpcServer server = new GrpcServer(properties,
+          new GreeterRpcService(),
+          new MetricsRpcService());
       server.start();
 
       log.info("Rpc server started, listen port 9001.");
