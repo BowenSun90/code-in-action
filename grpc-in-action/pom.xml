@@ -17,7 +17,7 @@
   </modules>
 
   <properties>
-    <protobuf-java.version>3.1.0</protobuf-java.version>
+    <protobuf-java.version>3.16.1</protobuf-java.version>
     <grpc.version>1.16.1</grpc.version>
     <guava.version>28.0-android</guava.version>
     <lombok.version>1.16.10</lombok.version>
